@@ -15,7 +15,7 @@ public class mob_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.mob_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_mob, container, false);
         return view;
     }
 }
