@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CyberpunkHelperV2</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_fight">Fight</string>
+    <string name="add_character">Add character</string>
+    <string name="delete_character">Delete character</string>
+    <string name="add_mob">Add mob</string>
+    <string name="delete_mob">Delete character</string>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navMenu1"
+        android:icon="@drawable/ic_camera"
+        android:title="Nav Menu1" />
+    <item
+        android:id="@+id/navMenu2"
+        android:icon="@drawable/ic_folder"
+        android:title="Nav Menu2" />
+    <item
+        android:id="@+id/navMenu3"
+        android:icon="@drawable/ic_photo"
+        android:title="Nav menu3" />
+</menu>
