@@ -7,4 +7,25 @@
     <string name="delete_character">Delete character</string>
     <string name="add_mob">Add mob</string>
     <string name="delete_mob">Delete character</string>
+    <string name="name">Name</string>
+    <string name="handle">Handle</string>
+    <string name="age">Age</string>
+    <string name="ch_points">Ch points</string>
+    <string name="loading">Loading...</string>
+    <string name="avatar">Avatar</string>
+    <string name="stats">STATS</string>
+    <string name="stats_int">INT</string>
+    <string name="stats_cool">COOL</string>
+    <string name="stats_luck">LUCK</string>
+    <string name="stats_ref">REF</string>
+    <string name="stats_tech">TECH</string>
+    <string name="stats_attr">ATTR</string>
+    <string name="stats_ma">MA</string>
+    <string name="stats_body">BODY</string>
+    <string name="stats_emp">EMP</string>
+    <string name="stats_run">RUN</string>
+    <string name="stats_leap">LEAP</string>
+    <string name="stats_lift">LIFT</string>
+    <string name="stats_save">SAVE</string>
+    <string name="stats_btm">BTM</string>
 </resources>

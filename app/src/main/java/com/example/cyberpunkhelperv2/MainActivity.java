@@ -68,12 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.app_bar_add_character:
-                Toast.makeText(MainActivity.this, "app_bar_add_character", Toast.LENGTH_SHORT).show();
                 mFragmentTransaction.replace(R.id.container, characterFragment);
                 break;
             case R.id.app_bar_delete_character:
                 mFragmentTransaction.replace(R.id.container, mobFragment);
-                Toast.makeText(MainActivity.this, "app_bar_delete_character", Toast.LENGTH_SHORT).show();
                 break;
         }
         mFragmentTransaction.commit();

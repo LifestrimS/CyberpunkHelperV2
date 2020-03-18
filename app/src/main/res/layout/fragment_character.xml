@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grayDark">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -11,77 +12,253 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imageView"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:src="@drawable/ic_person"/>
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:src="@drawable/ic_person"
+                    android:contentDescription="@string/avatar" />
 
                 <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:id="@+id/textViewName"
+                            android:text="@string/name"
+                            style="@style/TextViewBasic"/>
 
                         <EditText
-                            android:id="@+id/editText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:text="Name" />
+                            android:id="@+id/editTextName"
+                            android:inputType="text"
+                            android:hint="@string/name"
+                            style="@style/EditTextBasic" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textViewHandle"
+                            android:text="@string/handle"
+                            style="@style/TextViewBasic"/>
+
+                        <EditText
+                            android:id="@+id/editTextHandle"
+                            android:inputType="text"
+                            android:hint="@string/handle"
+                            style="@style/EditTextBasic" />
 
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:id="@+id/textViewAge"
+                            android:text="@string/age"
+                            style="@style/TextViewBasic" />
 
                         <EditText
-                            android:id="@+id/editText2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:text="Name" />
+                            android:id="@+id/editTextAge"
+                            android:hint="@string/age"
+                            android:inputType="number"
+                            style="@style/EditTextBasic" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
+                            android:id="@+id/textViewChPoints"
+                            android:text="@string/ch_points"
+                            style="@style/TextViewBasic"/>
 
                         <EditText
-                            android:id="@+id/editText3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:text="Name" />
+                            android:id="@+id/editTextChPoints"
+                            android:hint="@string/ch_points"
+                            android:inputType="number"
+                            style="@style/EditTextBasic"/>
                     </TableRow>
 
                 </TableLayout>
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textViewStats"
+                android:text="@string/stats"
+                android:layout_marginStart="10dp"
+                style="@style/TextViewBasic"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gray"
+                android:paddingBottom="10dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/textViewInt"
+                        android:text="@string/stats_int"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextInt"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewCool"
+                        android:text="@string/stats_cool"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextCool"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewLuck"
+                        android:text="@string/stats_luck"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextLuck"
+                        style="@style/EditTextStats"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewRef"
+                        android:text="@string/stats_ref"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextRef"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewTech"
+                        android:text="@string/stats_tech"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextTech"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewAttr"
+                        android:text="@string/stats_attr"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextAttr"
+                        style="@style/EditTextStats"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewMa"
+                        android:text="@string/stats_ma"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextMa"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewBody"
+                        android:text="@string/stats_body"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextBody"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewEmp"
+                        android:text="@string/stats_emp"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextEmp"
+                        style="@style/EditTextStats"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewRun"
+                        android:text="@string/stats_run"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextRun"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewLeap"
+                        android:text="@string/stats_leap"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextLeap"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewLift"
+                        android:text="@string/stats_lift"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextLift"
+                        style="@style/EditTextStats"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textViewSave"
+                        android:text="@string/stats_save"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextSave"
+                        style="@style/EditTextStats"/>
+
+                    <TextView
+                        android:id="@+id/textViewBtm"
+                        android:text="@string/stats_btm"
+                        style="@style/TextViewStats"/>
+
+                    <EditText
+                        android:id="@+id/editTextBtm"
+                        style="@style/EditTextStats"/>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
 </ScrollView>

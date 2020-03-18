@@ -3,14 +3,11 @@
     <color name="colorPrimary">#4D4D4D</color>
     <color name="colorPrimaryDark">#4D4D4D</color>
     <color name="colorAccent">#D9FFFF00</color>
-    <color name="colorBackground">#2A2A2A</color>
 
-    <color name="textColorPrimary">#D9FFFF00</color>
-    <color name="yellowTextColor">#D9FFFF00</color>
-    <color name="blueTextColor">#D900FFFF</color>
-
-    <color name="yellowDarkTextColor">#D9FFFF00</color>
-    <color name="blueDarkTextColor">#AD00FFFF</color>
+    <color name="blueColor">#AD00FFFF</color>
+    <color name="yellowColor">#D9FFFF00</color>
+    <color name="grayDark">#2A2A2A</color>
+    <color name="gray">#4D4D4D</color>
 
     <color name="buttonColor">#666666</color>
     <color name="buttonPressedColor">#4D4D4D</color>
