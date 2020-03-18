@@ -24,9 +24,11 @@
 
 
         <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/container">
+            android:layout_marginBottom="55dp"
+            >
 
         </FrameLayout>
 
@@ -38,7 +40,9 @@
             android:layout_gravity="bottom"
             app:fabCradleMargin="-10dp"
             app:fabCradleRoundedCornerRadius="0dp"
-            app:navigationIcon="@drawable/ic_menu" />
+            app:navigationIcon="@drawable/ic_menu"
+            app:hideOnScroll="true"
+            app:layout_scrollFlags="scroll|enterAlways"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

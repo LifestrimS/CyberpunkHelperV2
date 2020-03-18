@@ -1,13 +1,9 @@
 package com.example.cyberpunkhelperv2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.cyberpunkhelperv2.fragments.character_fragment;
 import com.example.cyberpunkhelperv2.fragments.mob_fragment;
