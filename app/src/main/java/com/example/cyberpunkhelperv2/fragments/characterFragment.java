@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.cyberpunkhelperv2.R;
 
-public class mob_fragment extends Fragment {
+public class characterFragment extends Fragment {
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mob, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_character, container, false);
         return view;
     }
 }

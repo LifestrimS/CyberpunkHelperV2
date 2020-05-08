@@ -4,11 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/app_bar_battle"
-        android:icon="@drawable/ic_battle"
-        android:title="@string/action_fight"
-        app:showAsAction="ifRoom"/>
-    <item
         android:id="@+id/app_bar_add_character"
         android:title="@string/add_character"
         app:showAsAction="never"/>
