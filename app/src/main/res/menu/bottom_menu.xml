@@ -4,20 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/app_bar_add_character"
+        android:id="@+id/app_bar_fav"
+        android:icon="@drawable/add"
         android:title="@string/add_character"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/app_bar_delete_character"
-        android:title="@string/delete_character"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/app_bar_add_mob"
-        android:title="@string/add_mob"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/app_bar_delete_mob"
-        android:title="@string/delete_mob"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>

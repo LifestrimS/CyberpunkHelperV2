@@ -39,4 +39,5 @@ public class NotesListViewModel extends AndroidViewModel {
     public void deleteById(Long idNote) {
         mNotesRepository.deleteById(idNote);
     }
+
 }
