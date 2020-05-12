@@ -16,6 +16,7 @@ import com.example.cyberpunkhelperv2.database.models.Note;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.cyberpunkhelperv2.R;
 import com.example.cyberpunkhelperv2.utils.DateConverter;
 
@@ -47,7 +48,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.custom_row_note,parent,false);
+                .inflate(R.layout.custom_row_note, parent, false);
         return new ViewHolder(view);
     }
 
@@ -73,7 +74,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         });
 
         final long noteId = holder.note.getId();
-        holder.mImageDeleteView.setOnClickListener( new View.OnClickListener() {
+        holder.mImageDeleteView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onListFragmentDeleteItemById(noteId);
@@ -106,6 +107,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             createdAt = view.findViewById(R.id.createdAt);
             mImageDeleteView = view.findViewById(R.id.imgDelete);
             backStrip = view.findViewById(R.id.backStrip);
+
         }
 
         @NonNull

@@ -16,7 +16,7 @@ import com.example.cyberpunkhelperv2.repositories.NotesRepository;
  */
 public class NotesListViewModel extends AndroidViewModel {
     private LiveData<List<Note>> mAllNotes;
-    NotesRepository mNotesRepository;
+    private NotesRepository mNotesRepository;
 
     public NotesListViewModel(@NonNull Application application) {
         super(application);

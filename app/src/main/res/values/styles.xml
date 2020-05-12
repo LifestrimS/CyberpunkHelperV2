@@ -34,23 +34,33 @@
     </style>
 
     <style name="TextViewStats">
-        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_marginStart">10dp</item>
-        <item name="android:layout_marginTop">10dp</item>
         <item name="android:textColor">@color/yellowColor</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="EditTextStats">
-        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_marginStart">5dp</item>
-        <item name="android:layout_marginTop">10dp</item>
         <item name="android:background">@drawable/button_back</item>
         <item name="android:inputType">number</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:maxLength">2</item>
+        <item name="android:textColor">@color/blueColor</item>
+        <item name="android:paddingTop">4dp</item>
+    </style>
+
+    <style name="StatsSetText">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingTop">7dp</item>
+        <item name="android:background">@drawable/button_back_noframe</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/blueColor</item>
     </style>
 

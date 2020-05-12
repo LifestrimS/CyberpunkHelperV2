@@ -126,33 +126,337 @@
 
             </LinearLayout>
 
-            <View style="@style/Divider"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/stats"
+            android:padding="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewInt"
+                    android:text="@string/stats_int"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextInt"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewCool"
+                    android:text="@string/stats_cool"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextCool"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewRef"
+                    android:text="@string/stats_ref"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextRef"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewTech"
+                    android:text="@string/stats_tech"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextTech"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewAttr"
+                    android:text="@string/stats_attr"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextAttr"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewLuck"
+                    android:text="@string/stats_luck"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextLuck"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewMa"
+                    android:text="@string/stats_ma"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextMa"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewBody"
+                    android:text="@string/stats_body"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextBody"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewEmp"
+                    android:text="@string/stats_emp"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextEmp"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewRun"
+                    android:text="@string/stats_run"
+                    style="@style/TextViewStats"/>
+
+                <TextView
+                    android:id="@+id/editTextRun"
+                    style="@style/StatsSetText"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewLeap"
+                    android:text="@string/stats_leap"
+                    style="@style/TextViewStats"/>
+
+                <TextView
+                    android:id="@+id/editTextLeap"
+                    style="@style/StatsSetText"/>
+
+                <TextView
+                    android:id="@+id/textViewLift"
+                    android:text="@string/stats_lift"
+                    style="@style/TextViewStats"/>
+
+                <TextView
+                    android:id="@+id/editTextLift"
+                    style="@style/StatsSetText"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewBtm"
+                    android:text="@string/stats_btm"
+                    style="@style/TextViewStats"/>
+
+                <TextView
+                    android:id="@+id/editTextBtm"
+                    style="@style/StatsSetText"/>
+
+                <TextView
+                    android:id="@+id/textViewSave"
+                    android:text="@string/stats_save"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextSave"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/armor"
+            android:padding="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"/>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingVertical="5dp">
+
+            <TextView
+                android:id="@+id/textViewArmorHead"
+                android:text="@string/armorHead"
+                style="@style/TextViewStats"/>
+
+            <EditText
+                android:id="@+id/editTextArmorHead"
+                style="@style/EditTextStats"/>
+
+            <TextView
+                android:id="@+id/textViewArmorTorso"
+                android:text="@string/armorTorso"
+                style="@style/TextViewStats"/>
+
+            <EditText
+                android:id="@+id/editTextArmorTorso"
+                style="@style/EditTextStats"/>
+
+        </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewArmorLArm"
+                    android:text="@string/armorLArm"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextArmorLArm"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewArmorRArm"
+                    android:text="@string/armorRArm"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextArmorRArm"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingVertical="5dp">
+
+                <TextView
+                    android:id="@+id/textViewArmorLLeg"
+                    android:text="@string/armorLLeg"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextArmorLLeg"
+                    style="@style/EditTextStats"/>
+
+                <TextView
+                    android:id="@+id/textViewArmorRLeg"
+                    android:text="@string/armorRLeg"
+                    style="@style/TextViewStats"/>
+
+                <EditText
+                    android:id="@+id/editTextArmorRLeg"
+                    style="@style/EditTextStats"/>
+
+            </TableRow>
+
+        </TableLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:background="@color/gray"
+            android:gravity="center"
+            android:background="@color/buttonShapeColor"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textViewAdd"
+            <Button
+                android:id="@+id/buttonGenerate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:text="@string/generate"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginHorizontal="2dp" />
+
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/add"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginHorizontal="2dp"/>
 
-            <TextView
-                android:id="@+id/textViewCancel"
+            <Button
+                android:id="@+id/buttonCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:text="@string/cancel"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginHorizontal="2dp"/>
 
         </LinearLayout>
 

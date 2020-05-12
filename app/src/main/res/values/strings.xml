@@ -45,4 +45,13 @@
     <string name="add">Add</string>
     <string name="save">Save</string>
 
+    <string name="armorHead">HEAD</string>
+    <string name="armorTorso">TORSO</string>
+    <string name="armorLArm">L.ARM</string>
+    <string name="armorRArm">R.ARM</string>
+    <string name="armorLLeg">L.Leg</string>
+    <string name="armorRLeg">R.Leg</string>
+    <string name="armor">ARMOR</string>
+    <string name="generate">Generate</string>
+
 </resources>

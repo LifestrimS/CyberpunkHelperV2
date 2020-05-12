@@ -14,14 +14,12 @@ import java.util.Date;
  * description and created at as shown below.
  */
 
-// Entity class model of room database
+
 @Entity
 public class Note {
-    // room database entity primary key
+
     @PrimaryKey(autoGenerate = true)
     public int id;
-    //private String noteTitle;
-    //private String noteDescription;
 
     private String name;
     private String handle;
@@ -29,17 +27,59 @@ public class Note {
     private String age;
     private String chPoints;
 
+    private String statInt;
+    private String statRef;
+    private String statTech;
+    private String statCool;
+
+    private String statAttr;
+    private String statLuck;
+    private String statMa;
+    private String statBody;
+
+    private String statEmp;
+    private String statRun;
+    private String statLeap;
+    private String statLift;
+
+    private String statBtm;
+    private String statSave;
+
     //type converter for date
     @TypeConverters(DateConverter.class)
     private Date createdAt;
 
-    public Note(String name, String handle, String role, String age, String chPoints, Date createdAt) {
+    public Note(String name, String handle, String role, String age, String chPoints,
+                String statInt, String statRef, String statTech, String statCool,
+                String statAttr, String statLuck, String statMa, String statBody,
+                String statEmp, String statRun, String statLeap, String statLift,
+                String statBtm, String statSave, Date createdAt) {
+
         this.name = name;
         this.handle = handle;
         this.role = role;
         this.age = age;
         this.chPoints = chPoints;
+
         this.createdAt = createdAt;
+
+        this.statInt = statInt;
+        this.statRef = statRef;
+        this.statTech = statTech;
+        this.statCool = statCool;
+
+        this.statAttr = statAttr;
+        this.statLuck = statLuck;
+        this.statMa = statMa;
+        this.statBody = statBody;
+
+        this.statEmp = statEmp;
+        this.statRun = statRun;
+        this.statLeap = statLeap;
+        this.statLift = statLift;
+
+        this.statBtm = statBtm;
+        this.statSave = statSave;
     }
 
     public int getId() {
@@ -48,14 +88,6 @@ public class Note {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getName() {
@@ -96,6 +128,126 @@ public class Note {
 
     public void setChPoints(String chPoints) {
         this.chPoints = chPoints;
+    }
+
+    public String getStatInt() {
+        return statInt;
+    }
+
+    public void setStatInt(String statInt) {
+        this.statInt = statInt;
+    }
+
+    public String getStatRef() {
+        return statRef;
+    }
+
+    public void setStatRef(String statRef) {
+        this.statRef = statRef;
+    }
+
+    public String getStatTech() {
+        return statTech;
+    }
+
+    public void setStatTech(String statTech) {
+        this.statTech = statTech;
+    }
+
+    public String getStatCool() {
+        return statCool;
+    }
+
+    public void setStatCool(String statCool) {
+        this.statCool = statCool;
+    }
+
+    public String getStatAttr() {
+        return statAttr;
+    }
+
+    public void setStatAttr(String statAttr) {
+        this.statAttr = statAttr;
+    }
+
+    public String getStatLuck() {
+        return statLuck;
+    }
+
+    public void setStatLuck(String statLuck) {
+        this.statLuck = statLuck;
+    }
+
+    public String getStatMa() {
+        return statMa;
+    }
+
+    public void setStatMa(String statMa) {
+        this.statMa = statMa;
+    }
+
+    public String getStatBody() {
+        return statBody;
+    }
+
+    public void setStatBody(String statBody) {
+        this.statBody = statBody;
+    }
+
+    public String getStatEmp() {
+        return statEmp;
+    }
+
+    public void setStatEmp(String statEmp) {
+        this.statEmp = statEmp;
+    }
+
+    public String getStatRun() {
+        return statRun;
+    }
+
+    public void setStatRun(String statRun) {
+        this.statRun = statRun;
+    }
+
+    public String getStatLeap() {
+        return statLeap;
+    }
+
+    public void setStatLeap(String statLeap) {
+        this.statLeap = statLeap;
+    }
+
+    public String getStatLift() {
+        return statLift;
+    }
+
+    public void setStatLift(String statLift) {
+        this.statLift = statLift;
+    }
+
+    public String getStatBtm() {
+        return statBtm;
+    }
+
+    public void setStatBtm(String statBtm) {
+        this.statBtm = statBtm;
+    }
+
+    public String getStatSave() {
+        return statSave;
+    }
+
+    public void setStatSave(String statSave) {
+        this.statSave = statSave;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
 

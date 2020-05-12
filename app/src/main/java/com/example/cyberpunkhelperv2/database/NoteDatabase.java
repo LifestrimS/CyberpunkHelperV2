@@ -38,3 +38,5 @@ public abstract class NoteDatabase extends RoomDatabase {
     //define note dao ( data access object )
     public abstract NoteDao noteDao();
 }
+
+//TODO: Function for migrate version

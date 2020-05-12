@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Dialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,8 @@ import com.example.cyberpunkhelperv2.viewModels.NotesListViewModel;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity
 
     NotesListViewModel mNotesListViewModel;
     FloatingActionButton fab;
+
+    //TODO generate character
 
 
     @Override
@@ -131,14 +137,48 @@ public class MainActivity extends AppCompatActivity
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.add_character_dialog);
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
         final EditText editTextName = dialog.findViewById(R.id.editTextName);
         final EditText editTextHandle = dialog.findViewById(R.id.editTextHandle);
         final EditText ediTextRole = dialog.findViewById(R.id.editTextRole);
         final EditText editTextAge = dialog.findViewById(R.id.editTextAge);
         final EditText editTextChPoints = dialog.findViewById(R.id.editTextChPoints);
-        TextView textViewAdd = dialog.findViewById(R.id.textViewAdd);
-        TextView textViewCancel = dialog.findViewById(R.id.textViewCancel);
-        textViewAdd.setOnClickListener(new View.OnClickListener() {
+
+        final EditText editTextStatsInt = dialog.findViewById(R.id.editTextInt);
+        final EditText editTextStatsRef = dialog.findViewById(R.id.editTextRef);
+        final EditText editTextStatsTech = dialog.findViewById(R.id.editTextTech);
+        final EditText editTextStatsCool = dialog.findViewById(R.id.editTextCool);
+        final EditText editTextStatsAttr = dialog.findViewById(R.id.editTextAttr);
+        final EditText editTextStatsLuck = dialog.findViewById(R.id.editTextLuck);
+        final EditText editTextStatsMa = dialog.findViewById(R.id.editTextMa);
+        final EditText editTextStatsBody = dialog.findViewById(R.id.editTextBody);
+        final EditText editTextStatsEmp = dialog.findViewById(R.id.editTextEmp);
+        final EditText editTextStatsSave = dialog.findViewById(R.id.editTextSave);
+
+        final TextView textViewRun = dialog.findViewById(R.id.editTextRun);
+        final TextView textViewLeap = dialog.findViewById(R.id.editTextLeap);
+        final TextView textViewLift = dialog.findViewById(R.id.editTextLift);
+        final TextView textViewBtm = dialog.findViewById(R.id.editTextBtm);
+
+        Button buttonAdd = dialog.findViewById(R.id.buttonAdd);
+        Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
+        Button buttonGenerate = dialog.findViewById(R.id.buttonGenerate);
+
+        buttonAdd.setEnabled(false);
+
+        buttonGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (generateStats(editTextStatsMa, editTextStatsBody,
+                        textViewRun, textViewLeap, textViewLift, textViewBtm)) {
+                    buttonAdd.setEnabled(true);
+                }
+            }
+        });
+
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String Name = editTextName.getText().toString();
@@ -147,23 +187,95 @@ public class MainActivity extends AppCompatActivity
                 String Age = editTextAge.getText().toString();
                 String ChPoints = editTextChPoints.getText().toString();
 
+                String StatsInt = editTextStatsInt.getText().toString();
+                String StatsRef = editTextStatsRef.getText().toString();
+                String StatsTech = editTextStatsTech.getText().toString();
+                String StatsCool = editTextStatsCool.getText().toString();
+                String StatsAttr = editTextStatsAttr.getText().toString();
+                String StatsLuck = editTextStatsLuck.getText().toString();
+                String StatsMa = editTextStatsMa.getText().toString();
+                String StatsBody = editTextStatsBody.getText().toString();
+                String StatsEmp = editTextStatsEmp.getText().toString();
+
+                String StatsSave = editTextStatsSave.getText().toString();
+
+                String StatsRun = textViewRun.getText().toString();
+                String StatsLeap = textViewLeap.getText().toString();
+                String StatsLift = textViewLift.getText().toString();
+                String StatsBtm = textViewBtm.getText().toString();
+
                 Date createdAt = Calendar.getInstance().getTime();
                 //add note
-                mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints, createdAt));
+                mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
+                        StatsInt, StatsRef, StatsTech, StatsCool,
+                        StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
+                        StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave, createdAt));
                 fab.show();
                 dialog.dismiss();
             }
         });
-        textViewCancel.setOnClickListener(new View.OnClickListener() {
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                //fab.show();
             }
         });
 
         dialog.show();
 
+    }
+
+    public boolean generateStats(TextView editTextStatsMa, TextView editTextStatsBody,
+                                 TextView textViewRun, TextView textViewLeap, TextView textViewLift, TextView textViewBtm) {
+
+        if (editTextStatsMa.getEditableText().toString().length() == 0 ||
+                editTextStatsBody.getEditableText().toString().length() == 0) {
+            Toast.makeText(getApplicationContext(), "U should enter MA and BODY!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            String StatsMa = editTextStatsMa.getText().toString();
+            String StatsBody = editTextStatsBody.getText().toString();
+
+            int run = Integer.parseInt(StatsMa) * 3;
+            String StatsRun = Integer.toString(run);
+
+            int leap = run / 4;
+            String StatsLeap = Integer.toString(leap);
+
+            int lift = Integer.parseInt(StatsBody) * 10;
+            String StatsLift = Integer.toString(lift);
+
+            int btm = 0;
+            switch (Integer.parseInt(StatsBody)) {
+                case 1:
+                case 2:
+                    btm = 0;
+                    break;
+                case 3:
+                case 4:
+                    btm = 1;
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    btm = 2;
+                    break;
+                case 8:
+                case 9:
+                    btm = 3;
+                    break;
+                default:
+                    btm = 4;
+                    break;
+            }
+            String StatsBtm = Integer.toString(btm);
+
+            textViewRun.setText(StatsRun);
+            textViewLeap.setText(StatsLeap);
+            textViewLift.setText(StatsLift);
+            textViewBtm.setText(StatsBtm);
+            return true;
+        }
     }
 
 
@@ -174,12 +286,31 @@ public class MainActivity extends AppCompatActivity
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.open_character_dialog);
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
         final EditText editTextName = dialog.findViewById(R.id.editTextName);
         final EditText editTextHandle = dialog.findViewById(R.id.editTextHandle);
         final EditText editTextRole = dialog.findViewById(R.id.editTextRole);
         final EditText editTextAge = dialog.findViewById(R.id.editTextAge);
         final EditText editTextChPoints = dialog.findViewById(R.id.editTextChPoints);
-        TextView textViewSave = dialog.findViewById(R.id.textViewSave);
+
+        final EditText editTextStatsInt = dialog.findViewById(R.id.editTextInt);
+        final EditText editTextStatsRef = dialog.findViewById(R.id.editTextRef);
+        final EditText editTextStatsTech = dialog.findViewById(R.id.editTextTech);
+        final EditText editTextStatsCool = dialog.findViewById(R.id.editTextCool);
+        final EditText editTextStatsAttr = dialog.findViewById(R.id.editTextAttr);
+        final EditText editTextStatsLuck = dialog.findViewById(R.id.editTextLuck);
+        final EditText editTextStatsMa = dialog.findViewById(R.id.editTextMa);
+        final EditText editTextStatsBody = dialog.findViewById(R.id.editTextBody);
+        final EditText editTextStatsEmp = dialog.findViewById(R.id.editTextEmp);
+        final EditText editTextStatsSave = dialog.findViewById(R.id.editTextSave);
+
+        final TextView textViewRun = dialog.findViewById(R.id.editTextRun);
+        final TextView textViewLeap = dialog.findViewById(R.id.editTextLeap);
+        final TextView textViewLift = dialog.findViewById(R.id.editTextLift);
+        final TextView textViewBtm = dialog.findViewById(R.id.editTextBtm);
+
+        Button buttonSave = dialog.findViewById(R.id.buttonSave);
+        Button buttonGenerate = dialog.findViewById(R.id.buttonGenerate);
 
         editTextName.setText(note.getName());
         editTextHandle.setText(note.getHandle());
@@ -187,8 +318,43 @@ public class MainActivity extends AppCompatActivity
         editTextChPoints.setText(note.getChPoints());
         editTextAge.setText(note.getAge());
 
+        editTextStatsInt.setText(note.getStatInt());
+        editTextStatsRef.setText(note.getStatRef());
+        editTextStatsTech.setText(note.getStatTech());
+        editTextStatsCool.setText(note.getStatCool());
+        editTextStatsAttr.setText(note.getStatAttr());
+        editTextStatsLuck.setText(note.getStatLuck());
+        editTextStatsMa.setText(note.getStatMa());
+        editTextStatsBody.setText(note.getStatBody());
+        editTextStatsEmp.setText(note.getStatEmp());
+        editTextStatsSave.setText(note.getStatSave());
 
-        textViewSave.setOnClickListener(new View.OnClickListener() {
+        textViewRun.setText(note.getStatRun());
+        textViewLeap.setText(note.getStatLeap());
+        textViewLift.setText(note.getStatLift());
+        textViewBtm.setText(note.getStatBtm());
+
+
+        if (textViewRun.getText().toString().length() == 0 ||
+                textViewLeap.getText().toString().length() == 0 ||
+                textViewLift.getText().toString().length() == 0 ||
+                textViewBtm.getText().toString().length() == 0) {
+            buttonSave.setEnabled(false);
+        }
+
+        buttonGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (generateStats(editTextStatsMa, editTextStatsBody,
+                        textViewRun, textViewLeap, textViewLift, textViewBtm)) {
+
+                    buttonSave.setEnabled(true);
+                }
+            }
+        });
+
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -198,10 +364,30 @@ public class MainActivity extends AppCompatActivity
                 String Age = editTextAge.getText().toString();
                 String ChPoints = editTextChPoints.getText().toString();
 
+                String StatsInt = editTextStatsInt.getText().toString();
+                String StatsRef = editTextStatsRef.getText().toString();
+                String StatsTech = editTextStatsTech.getText().toString();
+                String StatsCool = editTextStatsCool.getText().toString();
+                String StatsAttr = editTextStatsAttr.getText().toString();
+                String StatsLuck = editTextStatsLuck.getText().toString();
+                String StatsMa = editTextStatsMa.getText().toString();
+                String StatsBody = editTextStatsBody.getText().toString();
+                String StatsEmp = editTextStatsEmp.getText().toString();
+
+                String StatsSave = editTextStatsSave.getText().toString();
+
+                String StatsRun = textViewRun.getText().toString();
+                String StatsLeap = textViewLeap.getText().toString();
+                String StatsLift = textViewLift.getText().toString();
+                String StatsBtm = textViewBtm.getText().toString();
+
                 Date createdAt = Calendar.getInstance().getTime();
                 //Update note
                 mNotesListViewModel.deleteById((long)note.getId());
-                mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints, createdAt));
+                mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
+                        StatsInt, StatsRef, StatsTech, StatsCool,
+                        StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
+                        StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave, createdAt));
 
                 fab.show();
                 dialog.dismiss();
