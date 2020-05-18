@@ -45,6 +45,13 @@ public class Note {
     private String statBtm;
     private String statSave;
 
+    private String armorHead;
+    private String armorTorso;
+    private String armorRArm;
+    private String armorLArm;
+    private String armorRLeg;
+    private String armorLLeg;
+
     //type converter for date
     @TypeConverters(DateConverter.class)
     private Date createdAt;
@@ -53,7 +60,9 @@ public class Note {
                 String statInt, String statRef, String statTech, String statCool,
                 String statAttr, String statLuck, String statMa, String statBody,
                 String statEmp, String statRun, String statLeap, String statLift,
-                String statBtm, String statSave, Date createdAt) {
+                String statBtm, String statSave,
+                String armorHead, String armorTorso, String armorRArm, String armorLArm, String armorRLeg, String armorLLeg,
+                Date createdAt) {
 
         this.name = name;
         this.handle = handle;
@@ -80,6 +89,13 @@ public class Note {
 
         this.statBtm = statBtm;
         this.statSave = statSave;
+
+        this.armorHead = armorHead;
+        this.armorTorso = armorTorso;
+        this.armorRArm = armorRArm;
+        this.armorLArm = armorLArm;
+        this.armorRLeg = armorRLeg;
+        this.armorLLeg = armorLLeg;
     }
 
     public int getId() {
@@ -249,5 +265,54 @@ public class Note {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getArmorHead() {
+        return armorHead;
+    }
+
+    public void setArmorHead(String armorHead) {
+        this.armorHead = armorHead;
+    }
+
+    public String getArmorTorso() {
+        return armorTorso;
+    }
+
+    public void setArmorTorso(String armorTorso) {
+        this.armorTorso = armorTorso;
+    }
+
+    public String getArmorRArm() {
+        return armorRArm;
+    }
+
+    public void setArmorRArm(String armorRArm) {
+        this.armorRArm = armorRArm;
+    }
+
+    public String getArmorLArm() {
+        return armorLArm;
+    }
+
+    public void setArmorLArm(String armorLArm) {
+        this.armorLArm = armorLArm;
+    }
+
+    public String getArmorRLeg() {
+        return armorRLeg;
+    }
+
+    public void setArmorRLeg(String armorRLeg) {
+        this.armorRLeg = armorRLeg;
+    }
+
+    public String getArmorLLeg() {
+        return armorLLeg;
+    }
+
+    public void setArmorLLeg(String armorLLeg) {
+        this.armorLLeg = armorLLeg;
+    }
+
 }
 

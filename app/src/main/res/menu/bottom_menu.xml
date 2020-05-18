@@ -4,9 +4,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/app_bar_fav"
+        android:id="@+id/add_character"
         android:icon="@drawable/add"
         android:title="@string/add_character"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/add_random_character"
+        android:icon="@drawable/add_random_caharcter"
+        android:title="@string/add_character"
+        app:showAsAction="ifRoom"
+        />
 
 </menu>
