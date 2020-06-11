@@ -48,7 +48,8 @@
                     android:id="@+id/editTextName"
                     style="@style/EditTextBasic"
                     android:hint="@string/name"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="Name" />
 
             </LinearLayout>
 
@@ -66,7 +67,8 @@
                     android:id="@+id/editTextHandle"
                     style="@style/EditTextBasic"
                     android:hint="@string/handle"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="Handle" />
 
             </LinearLayout>
 
@@ -84,7 +86,8 @@
                     android:id="@+id/editTextRole"
                     style="@style/EditTextBasic"
                     android:hint="@string/role"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:autofillHints="Role" />
 
             </LinearLayout>
 
@@ -102,7 +105,8 @@
                     android:id="@+id/editTextAge"
                     style="@style/EditTextBasic"
                     android:hint="@string/age"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:autofillHints="20" />
 
             </LinearLayout>
 
@@ -120,7 +124,8 @@
                     android:id="@+id/editTextChPoints"
                     style="@style/EditTextBasic"
                     android:hint="@string/ch_points"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:autofillHints="6" />
 
             </LinearLayout>
 
@@ -479,7 +484,7 @@
                     <EditText
                         android:id="@+id/editTextWeaponWa"
                         style="@style/EditTextWeapon"
-                        android:text="@string/wa"/>
+                        android:text="@string/wa" />
                 </TableRow>
 
                 <TableRow
@@ -534,18 +539,18 @@
                         <EditText
                             android:id="@+id/editTextWeaponDamD"
                             style="@style/EditTextWeaponDam"
-                            android:text="@string/d"/>
+                            android:text="@string/d" />
 
                         <TextView
                             android:id="@+id/textViewWeaponD"
-                            android:layout_height="30dp"
                             style="@style/TextViewWeapon"
+                            android:layout_height="30dp"
                             android:text="@string/d" />
 
                         <EditText
                             android:id="@+id/editTextWeaponDamNum"
                             style="@style/EditTextWeaponDam"
-                            android:text="@string/num"/>
+                            android:text="@string/num" />
                     </LinearLayout>
                 </TableRow>
 
@@ -563,7 +568,7 @@
                     <EditText
                         android:id="@+id/editTextWeaponShots"
                         style="@style/EditTextWeapon"
-                        android:text="@string/shots"/>
+                        android:text="@string/shots" />
                 </TableRow>
 
                 <TableRow
@@ -607,55 +612,56 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:background="@color/buttonShapeColor"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
-                android:text="@string/attack"
-                android:layout_marginHorizontal="2dp" />
+                android:text="@string/attack" />
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_back"
-                android:layout_margin="5dp">
+                android:background="@drawable/button_back">
 
                 <TextView
                     android:id="@+id/textViewAttackHit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/buttonShapeColor"
+                    android:paddingTop="6dp"
                     android:text="0"
                     android:textAlignment="center"
-                    android:textSize="20sp"
                     android:textColor="@color/blueColor"
-                    android:paddingTop="6dp"
-                    android:background="@color/buttonShapeColor"
-                    android:layout_margin="5dp"/>
+                    android:textSize="20sp" />
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_back"
-                android:layout_margin="5dp">
+                android:background="@drawable/button_back">
 
                 <TextView
                     android:id="@+id/textViewAttackDamage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@color/buttonShapeColor"
+                    android:paddingTop="6dp"
                     android:text="0"
                     android:textAlignment="center"
-                    android:textSize="20sp"
                     android:textColor="@color/blueColor"
-                    android:paddingTop="6dp"
-                    android:background="@color/buttonShapeColor"
-                    android:layout_margin="5dp"/>
+                    android:textSize="20sp" />
             </FrameLayout>
 
         </LinearLayout>
@@ -663,31 +669,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:background="@color/buttonShapeColor"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonSurvivalRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
-                android:text="@string/survival_rate"
-                android:layout_marginHorizontal="2dp"/>
+                android:text="@string/survival_rate" />
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_back"
-                android:layout_margin="5dp">
+                android:background="@drawable/button_back">
 
                 <TextView
                     android:id="@+id/textViewSurvivalRate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text=""
+                    android:layout_margin="5dp"
                     android:background="@color/buttonShapeColor"
-                    android:layout_margin="5dp"/>
+                    android:text="" />
             </FrameLayout>
 
         </LinearLayout>

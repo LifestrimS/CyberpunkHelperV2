@@ -5,8 +5,6 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.cyberpunkhelperv2.database.Daos.NoteDao;
 import com.example.cyberpunkhelperv2.database.models.Note;
@@ -34,19 +32,12 @@ public abstract class NoteDatabase extends RoomDatabase {
     }
 
     //method to remove instance
-    public static void closeDatabase() {
+    /*public static void closeDatabase() {
         mInstance = null;
-    }
+    }*/
 
     //define note dao ( data access object )
     public abstract NoteDao noteDao();
-
-    /*public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(final SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE Note ADD COLUMN test TEXT");
-        }
-    };*/
 }
 
 //TODO: Function for migrate version

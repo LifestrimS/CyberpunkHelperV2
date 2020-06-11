@@ -1,34 +1,27 @@
 package com.example.cyberpunkhelperv2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,19 +64,16 @@ public class MainActivity extends AppCompatActivity
 
         BottomAppBar bar = findViewById(R.id.bottomAppBar);
         bar.replaceMenu(R.menu.bottom_menu);
-        bar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case (R.id.add_random_character):
-                        generateCharacter();
-                        break;
-                    case (R.id.add_character):
-                        showAddCharacterDialog();
-                        break;
-                }
-                return true;
+        bar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case (R.id.add_random_character):
+                    generateCharacter();
+                    break;
+                case (R.id.add_character):
+                    showAddCharacterDialog();
+                    break;
             }
+            return true;
         });
 
         mNotesListViewModel = ViewModelProviders.of(this).get(NotesListViewModel.class);
@@ -93,14 +83,8 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack("list")
                 .commit();
 
-
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dropDices();
-            }
-        });
+        fab.setOnClickListener(v -> dropDices());
     }
 
     public void generateCharacter() {
@@ -125,7 +109,7 @@ public class MainActivity extends AppCompatActivity
         String StatsLeap = String.valueOf(Integer.parseInt(StatsRun) / 4);
         String StatsLift = String.valueOf(Integer.parseInt(StatsBody) * 10);
 
-        int btm = 0;
+        int btm;
         switch (Integer.parseInt(StatsBody)) {
             case 1:
             case 2:
@@ -184,7 +168,7 @@ public class MainActivity extends AppCompatActivity
         String[] numberDices = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
         final Spinner spinnerDices = dialog.findViewById(R.id.spinnerDices);
-        ArrayAdapter<String> adapterDices = new ArrayAdapter<String>(this, R.layout.spinner_row, dices);
+        ArrayAdapter<String> adapterDices = new ArrayAdapter<>(this, R.layout.spinner_row, dices);
         spinnerDices.setAdapter(adapterDices);
 
         final Spinner spinnerNumberDices = dialog.findViewById(R.id.spinnerNumberDices);
@@ -194,22 +178,19 @@ public class MainActivity extends AppCompatActivity
         TextView dropDice = dialog.findViewById(R.id.twDiceCount);
 
         Button buttonDrop = dialog.findViewById(R.id.buttonDrop);
-        buttonDrop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int selectedDices = Integer.parseInt(spinnerDices.getSelectedItem().toString());
-                int selectedNumberDices = Integer.parseInt(spinnerNumberDices.getSelectedItem().toString());
-                Log.d("TAG", "selectedDice: " + selectedDices);
-                Log.d("TAG", "selectedNumberDices: " + selectedNumberDices);
+        buttonDrop.setOnClickListener(view -> {
+            int selectedDices = Integer.parseInt(spinnerDices.getSelectedItem().toString());
+            int selectedNumberDices = Integer.parseInt(spinnerNumberDices.getSelectedItem().toString());
+            Log.d("TAG", "selectedDice: " + selectedDices);
+            Log.d("TAG", "selectedNumberDices: " + selectedNumberDices);
 
-                Random random = new Random();
-                int sum = 0;
-                for (int i = 0; i < selectedNumberDices; i++) {
-                    sum += random.nextInt(selectedDices) + 1;
-                }
-                dropDice.setText(String.valueOf(sum));
-
+            Random random = new Random();
+            int sum = 0;
+            for (int i = 0; i < selectedNumberDices; i++) {
+                sum += random.nextInt(selectedDices) + 1;
             }
+            dropDice.setText(String.valueOf(sum));
+
         });
 
         dialog.show();
@@ -223,7 +204,6 @@ public class MainActivity extends AppCompatActivity
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         final ImageButton avatarImageButton = dialog.findViewById(R.id.avatarImage);
-        final Bitmap[] bitmap = {null};
 
         final EditText editTextName = dialog.findViewById(R.id.editTextName);
         final EditText editTextHandle = dialog.findViewById(R.id.editTextHandle);
@@ -276,138 +256,120 @@ public class MainActivity extends AppCompatActivity
         final TextView textViewSurvivalRate = dialog.findViewById(R.id.textViewSurvivalRate);
 
 
-        buttonSurvivalRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (editTextArmorHead.getText().toString().length() == 0 ||
-                        editTextArmorTorso.getText().toString().length() == 0 ||
-                        editTextArmorRArm.getText().toString().length() == 0 ||
-                        editTextArmorLArm.getText().toString().length() == 0 ||
-                        editTextArmorRLeg.getText().toString().length() == 0 ||
-                        editTextArmorLLeg.getText().toString().length() == 0)
-                {
-                    textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.buttonShapeColor));
-                    Toast.makeText(getApplicationContext(), "U should enter all armor!", Toast.LENGTH_SHORT).show();
-                } else {
-                    int[] armorArray = {Integer.parseInt(editTextArmorHead.getText().toString()),
-                            Integer.parseInt(editTextArmorTorso.getText().toString()),
-                            Integer.parseInt(editTextArmorRArm.getText().toString()),
-                            Integer.parseInt(editTextArmorLArm.getText().toString()),
-                            Integer.parseInt(editTextArmorRLeg.getText().toString()),
-                            Integer.parseInt(editTextArmorLLeg.getText().toString())};
+        buttonSurvivalRate.setOnClickListener(view -> {
+            if (editTextArmorHead.getText().toString().length() == 0 ||
+                    editTextArmorTorso.getText().toString().length() == 0 ||
+                    editTextArmorRArm.getText().toString().length() == 0 ||
+                    editTextArmorLArm.getText().toString().length() == 0 ||
+                    editTextArmorRLeg.getText().toString().length() == 0 ||
+                    editTextArmorLLeg.getText().toString().length() == 0) {
+                textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.buttonShapeColor));
+                Toast.makeText(getApplicationContext(), "U should enter all armor!", Toast.LENGTH_SHORT).show();
+            } else {
+                int[] armorArray = {Integer.parseInt(editTextArmorHead.getText().toString()),
+                        Integer.parseInt(editTextArmorTorso.getText().toString()),
+                        Integer.parseInt(editTextArmorRArm.getText().toString()),
+                        Integer.parseInt(editTextArmorLArm.getText().toString()),
+                        Integer.parseInt(editTextArmorRLeg.getText().toString()),
+                        Integer.parseInt(editTextArmorLLeg.getText().toString())};
 
-                    checkSurvivalRate(armorArray, textViewSurvivalRate );
+                checkSurvivalRate(armorArray, textViewSurvivalRate);
+            }
+        });
+
+        avatarImageButton.setOnClickListener(view -> {
+            if (ContextCompat.checkSelfPermission(dialog.getContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ);
+
+            } else {
+
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, GALLERY_REQUEST);
+                SystemClock.sleep(5000);
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(imagePath));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                avatarImageButton.setImageBitmap(bitmap);
             }
+
         });
 
-        avatarImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(dialog.getContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            MY_PERMISSIONS_REQUEST_READ);
-
-                } else {
-
-                    Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, GALLERY_REQUEST);
-                    SystemClock.sleep(5000);
-                    Bitmap bitmap = null;
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(imagePath));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    avatarImageButton.setImageBitmap(bitmap);
-                }
-                
-            }
-        });
-
-        buttonGenerate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (generateStats(editTextStatsMa, editTextStatsBody,
-                        textViewRun, textViewLeap, textViewLift, textViewBtm)) {
-                    buttonAdd.setEnabled(true);
-                }
+        buttonGenerate.setOnClickListener(view -> {
+            if (generateStats(editTextStatsMa, editTextStatsBody,
+                    textViewRun, textViewLeap, textViewLift, textViewBtm)) {
+                buttonAdd.setEnabled(true);
             }
         });
 
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String Name = editTextName.getText().toString();
-                String Handle = editTextHandle.getText().toString();
-                String Role = ediTextRole.getText().toString();
-                String Age = editTextAge.getText().toString();
-                String ChPoints = editTextChPoints.getText().toString();
+        buttonAdd.setOnClickListener(v -> {
+            String Name = editTextName.getText().toString();
+            String Handle = editTextHandle.getText().toString();
+            String Role = ediTextRole.getText().toString();
+            String Age = editTextAge.getText().toString();
+            String ChPoints = editTextChPoints.getText().toString();
 
-                String StatsInt = editTextStatsInt.getText().toString();
-                String StatsRef = editTextStatsRef.getText().toString();
-                String StatsTech = editTextStatsTech.getText().toString();
-                String StatsCool = editTextStatsCool.getText().toString();
-                String StatsAttr = editTextStatsAttr.getText().toString();
-                String StatsLuck = editTextStatsLuck.getText().toString();
-                String StatsMa = editTextStatsMa.getText().toString();
-                String StatsBody = editTextStatsBody.getText().toString();
-                String StatsEmp = editTextStatsEmp.getText().toString();
+            String StatsInt = editTextStatsInt.getText().toString();
+            String StatsRef = editTextStatsRef.getText().toString();
+            String StatsTech = editTextStatsTech.getText().toString();
+            String StatsCool = editTextStatsCool.getText().toString();
+            String StatsAttr = editTextStatsAttr.getText().toString();
+            String StatsLuck = editTextStatsLuck.getText().toString();
+            String StatsMa = editTextStatsMa.getText().toString();
+            String StatsBody = editTextStatsBody.getText().toString();
+            String StatsEmp = editTextStatsEmp.getText().toString();
 
-                String StatsSave = editTextStatsSave.getText().toString();
+            String StatsSave = editTextStatsSave.getText().toString();
 
-                String StatsRun = textViewRun.getText().toString();
-                String StatsLeap = textViewLeap.getText().toString();
-                String StatsLift = textViewLift.getText().toString();
-                String StatsBtm = textViewBtm.getText().toString();
+            String StatsRun = textViewRun.getText().toString();
+            String StatsLeap = textViewLeap.getText().toString();
+            String StatsLift = textViewLift.getText().toString();
+            String StatsBtm = textViewBtm.getText().toString();
 
-                String armorHead = editTextArmorHead.getText().toString();
-                String armorTorso = editTextArmorTorso.getText().toString();
-                String armorRArm = editTextArmorRArm.getText().toString();
-                String armorLArm = editTextArmorLArm.getText().toString();
-                String armorRLeg = editTextArmorRLeg.getText().toString();
-                String armorLLeg = editTextArmorLLeg.getText().toString();
+            String armorHead = editTextArmorHead.getText().toString();
+            String armorTorso = editTextArmorTorso.getText().toString();
+            String armorRArm = editTextArmorRArm.getText().toString();
+            String armorLArm = editTextArmorLArm.getText().toString();
+            String armorRLeg = editTextArmorRLeg.getText().toString();
+            String armorLLeg = editTextArmorLLeg.getText().toString();
 
-                String weaponName = editTextWeaponName.getText().toString();
-                String weaponType = editTextWeaponType.getText().toString();
-                String weaponWa = editTextWeaponWa.getText().toString();
-                String weaponConc = editTextWeaponConc.getText().toString();
-                String weaponAvail = editTextWeaponAvail.getText().toString();
-                String weaponDamD = editTextWeaponDamD.getText().toString();
-                String weaponDamNum = editTextWeaponDamNum.getText().toString();
-                String weaponShots = editTextWeaponShots.getText().toString();
-                String weaponRof = editTextWeaponRof.getText().toString();
-                String weaponRel = editTextWeaponRel.getText().toString();
+            String weaponName = editTextWeaponName.getText().toString();
+            String weaponType = editTextWeaponType.getText().toString();
+            String weaponWa = editTextWeaponWa.getText().toString();
+            String weaponConc = editTextWeaponConc.getText().toString();
+            String weaponAvail = editTextWeaponAvail.getText().toString();
+            String weaponDamD = editTextWeaponDamD.getText().toString();
+            String weaponDamNum = editTextWeaponDamNum.getText().toString();
+            String weaponShots = editTextWeaponShots.getText().toString();
+            String weaponRof = editTextWeaponRof.getText().toString();
+            String weaponRel = editTextWeaponRel.getText().toString();
 
-                Date createdAt = Calendar.getInstance().getTime();
+            Date createdAt = Calendar.getInstance().getTime();
 
-                Weapon weapon = new Weapon(weaponName, weaponType, weaponWa, weaponConc,
-                        weaponAvail, weaponDamD, weaponDamNum, weaponShots, weaponRof, weaponRel);
+            Weapon weapon = new Weapon(weaponName, weaponType, weaponWa, weaponConc,
+                    weaponAvail, weaponDamD, weaponDamNum, weaponShots, weaponRof, weaponRel);
 
-                //add note
-                mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
-                        StatsInt, StatsRef, StatsTech, StatsCool,
-                        StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
-                        StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
-                        armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
-                        weapon,
-                        imagePath,
-                        createdAt));
-                fab.show();
-                dialog.dismiss();
-            }
+            //add note
+            mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
+                    StatsInt, StatsRef, StatsTech, StatsCool,
+                    StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
+                    StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
+                    armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
+                    weapon,
+                    imagePath,
+                    createdAt));
+            fab.show();
+            dialog.dismiss();
         });
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        buttonCancel.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
 
@@ -417,42 +379,13 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
-        Bitmap bitmap = null;
-        ImageButton imageButton = findViewById(R.id.avatarImage);
-
-        switch(requestCode) {
-            case GALLERY_REQUEST:
-                if (resultCode == RESULT_OK) {
-                    Uri selectedImage = imageReturnedIntent.getData();
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    //imageButton.setImageBitmap(bitmap);
-                    assert selectedImage != null;
-                    imagePath = selectedImage.toString();
-                }
+        if (requestCode == GALLERY_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = imageReturnedIntent.getData();
+                assert selectedImage != null;
+                imagePath = selectedImage.toString();
+            }
         }
-
-        /*if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && null != imageReturnedIntent) {
-            Uri selectedImage = imageReturnedIntent.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            ImageButton avatarImage = findViewById(R.id.avatarImage);
-            avatarImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-            imagePath = selectedImage.toString();
-
-        }*/
     }
 
     public boolean generateStats(TextView editTextStatsMa, TextView editTextStatsBody,
@@ -475,7 +408,7 @@ public class MainActivity extends AppCompatActivity
             int lift = Integer.parseInt(StatsBody) * 10;
             String StatsLift = Integer.toString(lift);
 
-            int btm = 0;
+            int btm;
             switch (Integer.parseInt(StatsBody)) {
                 case 1:
                 case 2:
@@ -569,49 +502,67 @@ public class MainActivity extends AppCompatActivity
 
         Button buttonAttack = dialog.findViewById(R.id.buttonAttack);
 
-        buttonAttack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Random random = new Random();
-                int weaponWa = Integer.parseInt(editTextWeaponWa.getText().toString());
-                int randomHit = random.nextInt(10) + 1 + weaponWa;
-                textViewAttackHit.setText(String.valueOf(randomHit));
+        avatarImageButton.setOnClickListener(view -> {
+            Log.d("AVATAR", "1");
+            if (ContextCompat.checkSelfPermission(dialog.getContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
 
-                int damageD = Integer.parseInt(editTextWeaponDamD.getText().toString());
-                int damageNum = Integer.parseInt(editTextWeaponDamNum.getText().toString());
-                int rof = Integer.parseInt(editTextWeaponRof.getText().toString());
-                int damage = rof * (damageD * (random.nextInt(damageNum) + 1));
-                textViewAttackDamage.setText(String.valueOf(damage));
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ);
+
+            } else {
+
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, GALLERY_REQUEST);
+                SystemClock.sleep(5000);
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(imagePath));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                avatarImageButton.setImageBitmap(bitmap);
             }
+
         });
 
-        buttonSurvivalRate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (editTextArmorHead.getText().toString().length() == 0 ||
-                        editTextArmorTorso.getText().toString().length() == 0 ||
-                        editTextArmorRArm.getText().toString().length() == 0 ||
-                        editTextArmorLArm.getText().toString().length() == 0 ||
-                        editTextArmorRLeg.getText().toString().length() == 0 ||
-                        editTextArmorLLeg.getText().toString().length() == 0)
-                {
-                    textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.buttonShapeColor));
-                    Toast.makeText(getApplicationContext(), "U should enter all armor!", Toast.LENGTH_SHORT).show();
-                } else {
-                    int[] armorArray = {Integer.parseInt(editTextArmorHead.getText().toString()),
-                            Integer.parseInt(editTextArmorTorso.getText().toString()),
-                            Integer.parseInt(editTextArmorRArm.getText().toString()),
-                            Integer.parseInt(editTextArmorLArm.getText().toString()),
-                            Integer.parseInt(editTextArmorRLeg.getText().toString()),
-                            Integer.parseInt(editTextArmorLLeg.getText().toString())};
+        buttonAttack.setOnClickListener(view -> {
+            Random random = new Random();
+            int weaponWa = Integer.parseInt(editTextWeaponWa.getText().toString());
+            int randomHit = random.nextInt(10) + 1 + weaponWa;
+            textViewAttackHit.setText(String.valueOf(randomHit));
 
-                    checkSurvivalRate(armorArray, textViewSurvivalRate );
-                }
+            int damageD = Integer.parseInt(editTextWeaponDamD.getText().toString());
+            int damageNum = Integer.parseInt(editTextWeaponDamNum.getText().toString());
+            int rof = Integer.parseInt(editTextWeaponRof.getText().toString());
+            int damage = rof * (damageD * (random.nextInt(damageNum) + 1));
+            textViewAttackDamage.setText(String.valueOf(damage));
+        });
+
+        buttonSurvivalRate.setOnClickListener(view -> {
+            if (editTextArmorHead.getText().toString().length() == 0 ||
+                    editTextArmorTorso.getText().toString().length() == 0 ||
+                    editTextArmorRArm.getText().toString().length() == 0 ||
+                    editTextArmorLArm.getText().toString().length() == 0 ||
+                    editTextArmorRLeg.getText().toString().length() == 0 ||
+                    editTextArmorLLeg.getText().toString().length() == 0) {
+                textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.buttonShapeColor));
+                Toast.makeText(getApplicationContext(), "U should enter all armor!", Toast.LENGTH_SHORT).show();
+            } else {
+                int[] armorArray = {Integer.parseInt(editTextArmorHead.getText().toString()),
+                        Integer.parseInt(editTextArmorTorso.getText().toString()),
+                        Integer.parseInt(editTextArmorRArm.getText().toString()),
+                        Integer.parseInt(editTextArmorLArm.getText().toString()),
+                        Integer.parseInt(editTextArmorRLeg.getText().toString()),
+                        Integer.parseInt(editTextArmorLLeg.getText().toString())};
+
+                checkSurvivalRate(armorArray, textViewSurvivalRate);
             }
         });
 
         if (!note.getAvatarPath().equals("")) {
-
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(note.getAvatarPath()));
@@ -620,7 +571,7 @@ public class MainActivity extends AppCompatActivity
             }
             avatarImageButton.setImageBitmap(bitmap);
         }
-        avatarImageButton.setEnabled(false);
+        //avatarImageButton.setEnabled(false);
 
         editTextName.setText(note.getName());
         editTextHandle.setText(note.getHandle());
@@ -670,81 +621,75 @@ public class MainActivity extends AppCompatActivity
             buttonSave.setEnabled(false);
         }
 
-        buttonGenerate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (generateStats(editTextStatsMa, editTextStatsBody,
-                        textViewRun, textViewLeap, textViewLift, textViewBtm)) {
+        buttonGenerate.setOnClickListener(view -> {
+            if (generateStats(editTextStatsMa, editTextStatsBody,
+                    textViewRun, textViewLeap, textViewLift, textViewBtm)) {
 
-                    buttonSave.setEnabled(true);
-                }
+                buttonSave.setEnabled(true);
             }
         });
 
 
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonSave.setOnClickListener(v -> {
 
-                String Name = editTextName.getText().toString();
-                String Handle = editTextHandle.getText().toString();
-                String Role = editTextRole.getText().toString();
-                String Age = editTextAge.getText().toString();
-                String ChPoints = editTextChPoints.getText().toString();
+            String Name = editTextName.getText().toString();
+            String Handle = editTextHandle.getText().toString();
+            String Role = editTextRole.getText().toString();
+            String Age = editTextAge.getText().toString();
+            String ChPoints = editTextChPoints.getText().toString();
 
-                String StatsInt = editTextStatsInt.getText().toString();
-                String StatsRef = editTextStatsRef.getText().toString();
-                String StatsTech = editTextStatsTech.getText().toString();
-                String StatsCool = editTextStatsCool.getText().toString();
-                String StatsAttr = editTextStatsAttr.getText().toString();
-                String StatsLuck = editTextStatsLuck.getText().toString();
-                String StatsMa = editTextStatsMa.getText().toString();
-                String StatsBody = editTextStatsBody.getText().toString();
-                String StatsEmp = editTextStatsEmp.getText().toString();
+            String StatsInt = editTextStatsInt.getText().toString();
+            String StatsRef = editTextStatsRef.getText().toString();
+            String StatsTech = editTextStatsTech.getText().toString();
+            String StatsCool = editTextStatsCool.getText().toString();
+            String StatsAttr = editTextStatsAttr.getText().toString();
+            String StatsLuck = editTextStatsLuck.getText().toString();
+            String StatsMa = editTextStatsMa.getText().toString();
+            String StatsBody = editTextStatsBody.getText().toString();
+            String StatsEmp = editTextStatsEmp.getText().toString();
 
-                String StatsSave = editTextStatsSave.getText().toString();
+            String StatsSave = editTextStatsSave.getText().toString();
 
-                String StatsRun = textViewRun.getText().toString();
-                String StatsLeap = textViewLeap.getText().toString();
-                String StatsLift = textViewLift.getText().toString();
-                String StatsBtm = textViewBtm.getText().toString();
+            String StatsRun = textViewRun.getText().toString();
+            String StatsLeap = textViewLeap.getText().toString();
+            String StatsLift = textViewLift.getText().toString();
+            String StatsBtm = textViewBtm.getText().toString();
 
-                String armorHead = editTextArmorHead.getText().toString();
-                String armorTorso = editTextArmorTorso.getText().toString();
-                String armorRArm = editTextArmorRArm.getText().toString();
-                String armorLArm = editTextArmorLArm.getText().toString();
-                String armorRLeg = editTextArmorRLeg.getText().toString();
-                String armorLLeg = editTextArmorLLeg.getText().toString();
+            String armorHead = editTextArmorHead.getText().toString();
+            String armorTorso = editTextArmorTorso.getText().toString();
+            String armorRArm = editTextArmorRArm.getText().toString();
+            String armorLArm = editTextArmorLArm.getText().toString();
+            String armorRLeg = editTextArmorRLeg.getText().toString();
+            String armorLLeg = editTextArmorLLeg.getText().toString();
 
-                String weaponName = editTextWeaponName.getText().toString();
-                String weaponType = editTextWeaponType.getText().toString();
-                String weaponWa = editTextWeaponWa.getText().toString();
-                String weaponConc = editTextWeaponConc.getText().toString();
-                String weaponAvail = editTextWeaponAvail.getText().toString();
-                String weaponDamD = editTextWeaponDamD.getText().toString();
-                String weaponDamNum = editTextWeaponDamNum.getText().toString();
-                String weaponShots = editTextWeaponShots.getText().toString();
-                String weaponRof = editTextWeaponRof.getText().toString();
-                String weaponRel = editTextWeaponRel.getText().toString();
+            String weaponName = editTextWeaponName.getText().toString();
+            String weaponType = editTextWeaponType.getText().toString();
+            String weaponWa = editTextWeaponWa.getText().toString();
+            String weaponConc = editTextWeaponConc.getText().toString();
+            String weaponAvail = editTextWeaponAvail.getText().toString();
+            String weaponDamD = editTextWeaponDamD.getText().toString();
+            String weaponDamNum = editTextWeaponDamNum.getText().toString();
+            String weaponShots = editTextWeaponShots.getText().toString();
+            String weaponRof = editTextWeaponRof.getText().toString();
+            String weaponRel = editTextWeaponRel.getText().toString();
 
-                Date createdAt = Calendar.getInstance().getTime();
+            Date createdAt = Calendar.getInstance().getTime();
 
-                Weapon weapon = new Weapon(weaponName, weaponType, weaponWa, weaponConc,
-                        weaponAvail, weaponDamD, weaponDamNum, weaponShots, weaponRof, weaponRel);
-                //Update note
-                mNotesListViewModel.deleteById((long)note.getId());
-                mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
-                        StatsInt, StatsRef, StatsTech, StatsCool,
-                        StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
-                        StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
-                        armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
-                        weapon,
-                        note.getAvatarPath(),
-                        createdAt));
+            Weapon weapon = new Weapon(weaponName, weaponType, weaponWa, weaponConc,
+                    weaponAvail, weaponDamD, weaponDamNum, weaponShots, weaponRof, weaponRel);
+            //Update note
+            mNotesListViewModel.deleteById((long) note.getId());
+            mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
+                    StatsInt, StatsRef, StatsTech, StatsCool,
+                    StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
+                    StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
+                    armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
+                    weapon,
+                    imagePath,
+                    createdAt));
 
-                fab.show();
-                dialog.dismiss();
-            }
+            fab.show();
+            dialog.dismiss();
         });
         dialog.show();
 
@@ -772,7 +717,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public int checkHP (int[] armorArray, int shot) {
+    public int checkHP(int[] armorArray, int shot) {
         int sum = 0;
         for (int value : armorArray) {
             sum += (value - shot);
