@@ -13,4 +13,8 @@
     <color name="buttonPressedColor">#4D4D4D</color>
     <color name="buttonShapeColor">#999999</color>
     <color name="white">#ffffff</color>
+
+    <color name="redSurv">#FF0000</color>
+    <color name="yellowSurv">#FFFF00</color>
+    <color name="greenSurv">#00FF00</color>
 </resources>

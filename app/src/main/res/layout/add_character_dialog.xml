@@ -29,7 +29,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageView"
+                android:id="@+id/avatarImage"
                 android:layout_width="wrap_content"
                 android:layout_height="180dp"
                 android:src="@drawable/ic_person"
@@ -420,6 +420,223 @@
             </TableRow>
 
         </TableLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/weapon"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponName"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/name" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponName"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/name" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponType"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/type" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponType"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/type" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponWa"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/wa" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponWa"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/wa" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponConc"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/conc" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponConc"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/conc" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponAvail"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/avail" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponAvail"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/avail" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponDam"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/dam" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/editTextWeaponDamD"
+                        style="@style/EditTextWeaponDam"
+                        android:text="@string/d" />
+
+                    <TextView
+                        android:id="@+id/textViewWeaponD"
+                        android:layout_height="30dp"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/d" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponDamNum"
+                        style="@style/EditTextWeaponDam"
+                        android:text="@string/num" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponShots"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/shots" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponShots"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/shots" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponRof"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/rof" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponRof"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/rof" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewWeaponRel"
+                    style="@style/TextViewWeapon"
+                    android:text="@string/rel" />
+
+                <EditText
+                    android:id="@+id/editTextWeaponRel"
+                    style="@style/EditTextWeapon"
+                    android:text="@string/rel" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/buttonShapeColor"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonSurvivalRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/survival_rate" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:id="@+id/textViewSurvivalRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:background="@color/buttonShapeColor"
+                    android:layout_margin="5dp"/>
+            </FrameLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

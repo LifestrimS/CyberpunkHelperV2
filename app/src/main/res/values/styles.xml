@@ -64,6 +64,43 @@
         <item name="android:textColor">@color/blueColor</item>
     </style>
 
+    <style name="TextViewWeapon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:textColor">@color/yellowColor</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="EditTextWeapon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:background">@drawable/button_back</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/blueColor</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditTextWeaponDam">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:background">@drawable/button_back</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/blueColor</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">5dp</item>

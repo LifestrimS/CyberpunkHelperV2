@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blueColor">
@@ -9,10 +8,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/buttonShapeColor"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp">
+        android:background="@color/buttonShapeColor"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -28,12 +27,12 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageView"
+                android:id="@+id/avatarImage"
                 android:layout_width="wrap_content"
                 android:layout_height="180dp"
-                android:src="@drawable/ic_person"
+                android:layout_gravity="center"
                 android:contentDescription="@string/avatar"
-                android:layout_gravity="center"/>
+                android:src="@drawable/ic_person" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,14 +41,14 @@
 
                 <TextView
                     android:id="@+id/textViewName"
-                    android:text="@string/name"
-                    style="@style/TextViewBasic"/>
+                    style="@style/TextViewBasic"
+                    android:text="@string/name" />
 
                 <EditText
                     android:id="@+id/editTextName"
-                    android:inputType="text"
+                    style="@style/EditTextBasic"
                     android:hint="@string/name"
-                    style="@style/EditTextBasic" />
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -60,14 +59,14 @@
 
                 <TextView
                     android:id="@+id/textViewHandle"
-                    android:text="@string/handle"
-                    style="@style/TextViewBasic"/>
+                    style="@style/TextViewBasic"
+                    android:text="@string/handle" />
 
                 <EditText
                     android:id="@+id/editTextHandle"
-                    android:inputType="text"
+                    style="@style/EditTextBasic"
                     android:hint="@string/handle"
-                    style="@style/EditTextBasic" />
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -78,14 +77,14 @@
 
                 <TextView
                     android:id="@+id/textViewRole"
-                    android:text="@string/role"
-                    style="@style/TextViewBasic" />
+                    style="@style/TextViewBasic"
+                    android:text="@string/role" />
 
                 <EditText
                     android:id="@+id/editTextRole"
+                    style="@style/EditTextBasic"
                     android:hint="@string/role"
-                    android:inputType="text"
-                    style="@style/EditTextBasic" />
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -96,14 +95,14 @@
 
                 <TextView
                     android:id="@+id/textViewAge"
-                    android:text="@string/age"
-                    style="@style/TextViewBasic" />
+                    style="@style/TextViewBasic"
+                    android:text="@string/age" />
 
                 <EditText
                     android:id="@+id/editTextAge"
+                    style="@style/EditTextBasic"
                     android:hint="@string/age"
-                    android:inputType="number"
-                    style="@style/EditTextBasic" />
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -114,14 +113,14 @@
 
                 <TextView
                     android:id="@+id/textViewChPoints"
-                    android:text="@string/ch_points"
-                    style="@style/TextViewBasic"/>
+                    style="@style/TextViewBasic"
+                    android:text="@string/ch_points" />
 
                 <EditText
                     android:id="@+id/editTextChPoints"
+                    style="@style/EditTextBasic"
                     android:hint="@string/ch_points"
-                    android:inputType="number"
-                    style="@style/EditTextBasic"/>
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -130,10 +129,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:text="@string/stats"
                 android:padding="4dp"
+                android:text="@string/stats"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -147,21 +146,21 @@
 
                     <TextView
                         android:id="@+id/textViewInt"
-                        android:text="@string/stats_int"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_int" />
 
                     <EditText
                         android:id="@+id/editTextInt"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewCool"
-                        android:text="@string/stats_cool"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_cool" />
 
                     <EditText
                         android:id="@+id/editTextCool"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -173,21 +172,21 @@
 
                     <TextView
                         android:id="@+id/textViewRef"
-                        android:text="@string/stats_ref"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_ref" />
 
                     <EditText
                         android:id="@+id/editTextRef"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewTech"
-                        android:text="@string/stats_tech"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_tech" />
 
                     <EditText
                         android:id="@+id/editTextTech"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -199,21 +198,21 @@
 
                     <TextView
                         android:id="@+id/textViewAttr"
-                        android:text="@string/stats_attr"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_attr" />
 
                     <EditText
                         android:id="@+id/editTextAttr"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewLuck"
-                        android:text="@string/stats_luck"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_luck" />
 
                     <EditText
                         android:id="@+id/editTextLuck"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -225,21 +224,21 @@
 
                     <TextView
                         android:id="@+id/textViewMa"
-                        android:text="@string/stats_ma"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_ma" />
 
                     <EditText
                         android:id="@+id/editTextMa"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewBody"
-                        android:text="@string/stats_body"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_body" />
 
                     <EditText
                         android:id="@+id/editTextBody"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -251,21 +250,21 @@
 
                     <TextView
                         android:id="@+id/textViewEmp"
-                        android:text="@string/stats_emp"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_emp" />
 
                     <EditText
                         android:id="@+id/editTextEmp"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewRun"
-                        android:text="@string/stats_run"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_run" />
 
                     <TextView
                         android:id="@+id/editTextRun"
-                        style="@style/StatsSetText"/>
+                        style="@style/StatsSetText" />
 
                 </TableRow>
 
@@ -277,21 +276,21 @@
 
                     <TextView
                         android:id="@+id/textViewLeap"
-                        android:text="@string/stats_leap"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_leap" />
 
                     <TextView
                         android:id="@+id/editTextLeap"
-                        style="@style/StatsSetText"/>
+                        style="@style/StatsSetText" />
 
                     <TextView
                         android:id="@+id/textViewLift"
-                        android:text="@string/stats_lift"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_lift" />
 
                     <TextView
                         android:id="@+id/editTextLift"
-                        style="@style/StatsSetText"/>
+                        style="@style/StatsSetText" />
 
                 </TableRow>
 
@@ -303,21 +302,21 @@
 
                     <TextView
                         android:id="@+id/textViewBtm"
-                        android:text="@string/stats_btm"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_btm" />
 
                     <TextView
                         android:id="@+id/editTextBtm"
-                        style="@style/StatsSetText"/>
+                        style="@style/StatsSetText" />
 
                     <TextView
                         android:id="@+id/textViewSave"
-                        android:text="@string/stats_save"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/stats_save" />
 
                     <EditText
                         android:id="@+id/editTextSave"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -328,10 +327,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:text="@string/armor"
                 android:padding="5dp"
+                android:text="@string/armor"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
 
             <TableLayout
@@ -346,21 +345,21 @@
 
                     <TextView
                         android:id="@+id/textViewArmorHead"
-                        android:text="@string/armorHead"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/armorHead" />
 
                     <EditText
                         android:id="@+id/editTextArmorHead"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewArmorTorso"
-                        android:text="@string/armorTorso"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/armorTorso" />
 
                     <EditText
                         android:id="@+id/editTextArmorTorso"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -372,21 +371,21 @@
 
                     <TextView
                         android:id="@+id/textViewArmorLArm"
-                        android:text="@string/armorLArm"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/armorLArm" />
 
                     <EditText
                         android:id="@+id/editTextArmorLArm"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewArmorRArm"
-                        android:text="@string/armorRArm"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/armorRArm" />
 
                     <EditText
                         android:id="@+id/editTextArmorRArm"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
@@ -398,57 +397,331 @@
 
                     <TextView
                         android:id="@+id/textViewArmorLLeg"
-                        android:text="@string/armorLLeg"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/armorLLeg" />
 
                     <EditText
                         android:id="@+id/editTextArmorLLeg"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                     <TextView
                         android:id="@+id/textViewArmorRLeg"
-                        android:text="@string/armorRLeg"
-                        style="@style/TextViewStats"/>
+                        style="@style/TextViewStats"
+                        android:text="@string/armorRLeg" />
 
                     <EditText
                         android:id="@+id/editTextArmorRLeg"
-                        style="@style/EditTextStats"/>
+                        style="@style/EditTextStats" />
 
                 </TableRow>
 
             </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/weapon"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponName"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/name" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponName"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/name" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponType"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/type" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponType"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/type" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponWa"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/wa" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponWa"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/wa"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponConc"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/conc" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponConc"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/conc" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponAvail"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/avail" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponAvail"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/avail" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponDam"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/dam" />
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editTextWeaponDamD"
+                            style="@style/EditTextWeaponDam"
+                            android:text="@string/d"/>
+
+                        <TextView
+                            android:id="@+id/textViewWeaponD"
+                            android:layout_height="30dp"
+                            style="@style/TextViewWeapon"
+                            android:text="@string/d" />
+
+                        <EditText
+                            android:id="@+id/editTextWeaponDamNum"
+                            style="@style/EditTextWeaponDam"
+                            android:text="@string/num"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponShots"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/shots" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponShots"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/shots"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponRof"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/rof" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponRof"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/rof" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewWeaponRel"
+                        style="@style/TextViewWeapon"
+                        android:text="@string/rel" />
+
+                    <EditText
+                        android:id="@+id/editTextWeaponRel"
+                        style="@style/EditTextWeapon"
+                        android:text="@string/rel" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/buttonShapeColor"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonAttack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/attack"
+                android:layout_marginHorizontal="2dp" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:id="@+id/textViewAttackHit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/blueColor"
+                    android:paddingTop="6dp"
+                    android:background="@color/buttonShapeColor"
+                    android:layout_margin="5dp"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:id="@+id/textViewAttackDamage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/blueColor"
+                    android:paddingTop="6dp"
+                    android:background="@color/buttonShapeColor"
+                    android:layout_margin="5dp"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/buttonShapeColor"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonSurvivalRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/survival_rate"
+                android:layout_marginHorizontal="2dp"/>
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:id="@+id/textViewSurvivalRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:background="@color/buttonShapeColor"
+                    android:layout_margin="5dp"/>
+            </FrameLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:background="@color/buttonShapeColor"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonGenerate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="8dp"
                 android:text="@string/generate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"
-                android:textSize="12sp"
-                android:layout_marginHorizontal="2dp"
-                android:paddingHorizontal="8dp"
-                android:layout_weight="1"/>
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="8dp"
                 android:text="@string/save"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"
-                android:textSize="12sp"
-                android:layout_marginHorizontal="2dp"
-                android:paddingHorizontal="8dp"
-                android:layout_weight="1"/>
+                android:textSize="12sp" />
 
         </LinearLayout>
 

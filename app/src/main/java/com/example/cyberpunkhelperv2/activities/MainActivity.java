@@ -2,14 +2,23 @@ package com.example.cyberpunkhelperv2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,21 +27,22 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cyberpunkhelperv2.R;
 import com.example.cyberpunkhelperv2.database.models.Note;
+import com.example.cyberpunkhelperv2.database.models.Weapon;
 import com.example.cyberpunkhelperv2.fragments.AlertDialogFragment;
 import com.example.cyberpunkhelperv2.fragments.ListFragment;
-import com.example.cyberpunkhelperv2.fragments.characterFragment;
 import com.example.cyberpunkhelperv2.viewModels.NotesListViewModel;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
-
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -44,17 +54,17 @@ public class MainActivity extends AppCompatActivity
         implements ListFragment.OnListFragmentInteractionListener,
         AlertDialogFragment.AlertDialogListener {
 
-    com.example.cyberpunkhelperv2.fragments.characterFragment characterFragment;
 
     NotesListViewModel mNotesListViewModel;
     FloatingActionButton fab;
+    private final int MY_PERMISSIONS_REQUEST_READ = 100;
+    static final int GALLERY_REQUEST = 1;
+    private String imagePath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        characterFragment = new characterFragment();
 
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
@@ -69,7 +79,7 @@ public class MainActivity extends AppCompatActivity
                         generateCharacter();
                         break;
                     case (R.id.add_character):
-                        showDialog();
+                        showAddCharacterDialog();
                         break;
                 }
                 return true;
@@ -92,7 +102,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-    
+
     public void generateCharacter() {
         String Name = "Name";
         String Handle = "Handle";
@@ -141,20 +151,25 @@ public class MainActivity extends AppCompatActivity
 
         String StatsBtm = String.valueOf(btm);
 
-        String armorHead = "2";
-        String armorTorso = "2";
-        String armorRArm = "2";
-        String armorLArm = "2";
-        String armorRLeg = "2";
-        String armorLLeg = "2";
+        String armorHead = "12";
+        String armorTorso = "12";
+        String armorRArm = "12";
+        String armorLArm = "12";
+        String armorRLeg = "12";
+        String armorLLeg = "12";
 
         Date createdAt = Calendar.getInstance().getTime();
+
+        Weapon weapon = new Weapon("Monoknife", "Melee", "+1", "P",
+                "P", "2", "6", "-", "-", "vr");
 
         mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
                 StatsInt, StatsRef, StatsTech, StatsCool,
                 StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
                 StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
                 armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
+                weapon,
+                "",
                 createdAt));
     }
 
@@ -200,13 +215,15 @@ public class MainActivity extends AppCompatActivity
         dialog.show();
     }
 
-    public void showDialog() {
+    public void showAddCharacterDialog() {
         //fab.hide();
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.add_character_dialog);
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        final ImageButton avatarImageButton = dialog.findViewById(R.id.avatarImage);
+        final Bitmap[] bitmap = {null};
 
         final EditText editTextName = dialog.findViewById(R.id.editTextName);
         final EditText editTextHandle = dialog.findViewById(R.id.editTextHandle);
@@ -238,11 +255,79 @@ public class MainActivity extends AppCompatActivity
         final EditText editTextArmorRLeg = dialog.findViewById(R.id.editTextArmorRLeg);
         final EditText editTextArmorLLeg = dialog.findViewById(R.id.editTextArmorLLeg);
 
+        final EditText editTextWeaponName = dialog.findViewById(R.id.editTextWeaponName);
+        final EditText editTextWeaponType = dialog.findViewById(R.id.editTextWeaponType);
+        final EditText editTextWeaponWa = dialog.findViewById(R.id.editTextWeaponWa);
+        final EditText editTextWeaponConc = dialog.findViewById(R.id.editTextWeaponConc);
+        final EditText editTextWeaponAvail = dialog.findViewById(R.id.editTextWeaponAvail);
+        final EditText editTextWeaponDamD = dialog.findViewById(R.id.editTextWeaponDamD);
+        final EditText editTextWeaponDamNum = dialog.findViewById(R.id.editTextWeaponDamNum);
+        final EditText editTextWeaponShots = dialog.findViewById(R.id.editTextWeaponShots);
+        final EditText editTextWeaponRof = dialog.findViewById(R.id.editTextWeaponRof);
+        final EditText editTextWeaponRel = dialog.findViewById(R.id.editTextWeaponRel);
+
         Button buttonAdd = dialog.findViewById(R.id.buttonAdd);
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonGenerate = dialog.findViewById(R.id.buttonGenerate);
 
         buttonAdd.setEnabled(false);
+
+        final Button buttonSurvivalRate = dialog.findViewById(R.id.buttonSurvivalRate);
+        final TextView textViewSurvivalRate = dialog.findViewById(R.id.textViewSurvivalRate);
+
+
+        buttonSurvivalRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editTextArmorHead.getText().toString().length() == 0 ||
+                        editTextArmorTorso.getText().toString().length() == 0 ||
+                        editTextArmorRArm.getText().toString().length() == 0 ||
+                        editTextArmorLArm.getText().toString().length() == 0 ||
+                        editTextArmorRLeg.getText().toString().length() == 0 ||
+                        editTextArmorLLeg.getText().toString().length() == 0)
+                {
+                    textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.buttonShapeColor));
+                    Toast.makeText(getApplicationContext(), "U should enter all armor!", Toast.LENGTH_SHORT).show();
+                } else {
+                    int[] armorArray = {Integer.parseInt(editTextArmorHead.getText().toString()),
+                            Integer.parseInt(editTextArmorTorso.getText().toString()),
+                            Integer.parseInt(editTextArmorRArm.getText().toString()),
+                            Integer.parseInt(editTextArmorLArm.getText().toString()),
+                            Integer.parseInt(editTextArmorRLeg.getText().toString()),
+                            Integer.parseInt(editTextArmorLLeg.getText().toString())};
+
+                    checkSurvivalRate(armorArray, textViewSurvivalRate );
+                }
+            }
+        });
+
+        avatarImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(dialog.getContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            MY_PERMISSIONS_REQUEST_READ);
+
+                } else {
+
+                    Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, GALLERY_REQUEST);
+                    SystemClock.sleep(5000);
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(imagePath));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    avatarImageButton.setImageBitmap(bitmap);
+                }
+                
+            }
+        });
 
         buttonGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -288,13 +373,30 @@ public class MainActivity extends AppCompatActivity
                 String armorRLeg = editTextArmorRLeg.getText().toString();
                 String armorLLeg = editTextArmorLLeg.getText().toString();
 
+                String weaponName = editTextWeaponName.getText().toString();
+                String weaponType = editTextWeaponType.getText().toString();
+                String weaponWa = editTextWeaponWa.getText().toString();
+                String weaponConc = editTextWeaponConc.getText().toString();
+                String weaponAvail = editTextWeaponAvail.getText().toString();
+                String weaponDamD = editTextWeaponDamD.getText().toString();
+                String weaponDamNum = editTextWeaponDamNum.getText().toString();
+                String weaponShots = editTextWeaponShots.getText().toString();
+                String weaponRof = editTextWeaponRof.getText().toString();
+                String weaponRel = editTextWeaponRel.getText().toString();
+
                 Date createdAt = Calendar.getInstance().getTime();
+
+                Weapon weapon = new Weapon(weaponName, weaponType, weaponWa, weaponConc,
+                        weaponAvail, weaponDamD, weaponDamNum, weaponShots, weaponRof, weaponRel);
+
                 //add note
                 mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
                         StatsInt, StatsRef, StatsTech, StatsCool,
                         StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
                         StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
                         armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
+                        weapon,
+                        imagePath,
                         createdAt));
                 fab.show();
                 dialog.dismiss();
@@ -309,6 +411,48 @@ public class MainActivity extends AppCompatActivity
 
         dialog.show();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        Bitmap bitmap = null;
+        ImageButton imageButton = findViewById(R.id.avatarImage);
+
+        switch(requestCode) {
+            case GALLERY_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = imageReturnedIntent.getData();
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //imageButton.setImageBitmap(bitmap);
+                    assert selectedImage != null;
+                    imagePath = selectedImage.toString();
+                }
+        }
+
+        /*if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK && null != imageReturnedIntent) {
+            Uri selectedImage = imageReturnedIntent.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageButton avatarImage = findViewById(R.id.avatarImage);
+            avatarImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            imagePath = selectedImage.toString();
+
+        }*/
     }
 
     public boolean generateStats(TextView editTextStatsMa, TextView editTextStatsBody,
@@ -402,8 +546,81 @@ public class MainActivity extends AppCompatActivity
         final EditText editTextArmorRLeg = dialog.findViewById(R.id.editTextArmorRLeg);
         final EditText editTextArmorLLeg = dialog.findViewById(R.id.editTextArmorLLeg);
 
-        Button buttonSave = dialog.findViewById(R.id.buttonSave);
-        Button buttonGenerate = dialog.findViewById(R.id.buttonGenerate);
+        final EditText editTextWeaponName = dialog.findViewById(R.id.editTextWeaponName);
+        final EditText editTextWeaponType = dialog.findViewById(R.id.editTextWeaponType);
+        final EditText editTextWeaponWa = dialog.findViewById(R.id.editTextWeaponWa);
+        final EditText editTextWeaponConc = dialog.findViewById(R.id.editTextWeaponConc);
+        final EditText editTextWeaponAvail = dialog.findViewById(R.id.editTextWeaponAvail);
+        final EditText editTextWeaponDamD = dialog.findViewById(R.id.editTextWeaponDamD);
+        final EditText editTextWeaponDamNum = dialog.findViewById(R.id.editTextWeaponDamNum);
+        final EditText editTextWeaponShots = dialog.findViewById(R.id.editTextWeaponShots);
+        final EditText editTextWeaponRof = dialog.findViewById(R.id.editTextWeaponRof);
+        final EditText editTextWeaponRel = dialog.findViewById(R.id.editTextWeaponRel);
+
+        final ImageButton avatarImageButton = dialog.findViewById(R.id.avatarImage);
+        final Button buttonSave = dialog.findViewById(R.id.buttonSave);
+        final Button buttonGenerate = dialog.findViewById(R.id.buttonGenerate);
+
+        final Button buttonSurvivalRate = dialog.findViewById(R.id.buttonSurvivalRate);
+        final TextView textViewSurvivalRate = dialog.findViewById(R.id.textViewSurvivalRate);
+
+        final TextView textViewAttackHit = dialog.findViewById(R.id.textViewAttackHit);
+        final TextView textViewAttackDamage = dialog.findViewById(R.id.textViewAttackDamage);
+
+        Button buttonAttack = dialog.findViewById(R.id.buttonAttack);
+
+        buttonAttack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Random random = new Random();
+                int weaponWa = Integer.parseInt(editTextWeaponWa.getText().toString());
+                int randomHit = random.nextInt(10) + 1 + weaponWa;
+                textViewAttackHit.setText(String.valueOf(randomHit));
+
+                int damageD = Integer.parseInt(editTextWeaponDamD.getText().toString());
+                int damageNum = Integer.parseInt(editTextWeaponDamNum.getText().toString());
+                int rof = Integer.parseInt(editTextWeaponRof.getText().toString());
+                int damage = rof * (damageD * (random.nextInt(damageNum) + 1));
+                textViewAttackDamage.setText(String.valueOf(damage));
+            }
+        });
+
+        buttonSurvivalRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editTextArmorHead.getText().toString().length() == 0 ||
+                        editTextArmorTorso.getText().toString().length() == 0 ||
+                        editTextArmorRArm.getText().toString().length() == 0 ||
+                        editTextArmorLArm.getText().toString().length() == 0 ||
+                        editTextArmorRLeg.getText().toString().length() == 0 ||
+                        editTextArmorLLeg.getText().toString().length() == 0)
+                {
+                    textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.buttonShapeColor));
+                    Toast.makeText(getApplicationContext(), "U should enter all armor!", Toast.LENGTH_SHORT).show();
+                } else {
+                    int[] armorArray = {Integer.parseInt(editTextArmorHead.getText().toString()),
+                            Integer.parseInt(editTextArmorTorso.getText().toString()),
+                            Integer.parseInt(editTextArmorRArm.getText().toString()),
+                            Integer.parseInt(editTextArmorLArm.getText().toString()),
+                            Integer.parseInt(editTextArmorRLeg.getText().toString()),
+                            Integer.parseInt(editTextArmorLLeg.getText().toString())};
+
+                    checkSurvivalRate(armorArray, textViewSurvivalRate );
+                }
+            }
+        });
+
+        if (!note.getAvatarPath().equals("")) {
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(note.getAvatarPath()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            avatarImageButton.setImageBitmap(bitmap);
+        }
+        avatarImageButton.setEnabled(false);
 
         editTextName.setText(note.getName());
         editTextHandle.setText(note.getHandle());
@@ -433,6 +650,17 @@ public class MainActivity extends AppCompatActivity
         editTextArmorLArm.setText(note.getArmorLArm());
         editTextArmorRLeg.setText(note.getArmorRLeg());
         editTextArmorLLeg.setText(note.getArmorLLeg());
+
+        editTextWeaponName.setText(note.weapon.getWeaponName());
+        editTextWeaponType.setText(note.weapon.getType());
+        editTextWeaponWa.setText(note.weapon.getWa());
+        editTextWeaponConc.setText(note.weapon.getConc());
+        editTextWeaponAvail.setText(note.weapon.getAvall());
+        editTextWeaponDamD.setText(note.weapon.getDamD());
+        editTextWeaponDamNum.setText(note.weapon.getDamNum());
+        editTextWeaponShots.setText(note.weapon.getShots());
+        editTextWeaponRof.setText(note.weapon.getROF());
+        editTextWeaponRel.setText(note.weapon.getReliability());
 
 
         if (textViewRun.getText().toString().length() == 0 ||
@@ -488,7 +716,21 @@ public class MainActivity extends AppCompatActivity
                 String armorRLeg = editTextArmorRLeg.getText().toString();
                 String armorLLeg = editTextArmorLLeg.getText().toString();
 
+                String weaponName = editTextWeaponName.getText().toString();
+                String weaponType = editTextWeaponType.getText().toString();
+                String weaponWa = editTextWeaponWa.getText().toString();
+                String weaponConc = editTextWeaponConc.getText().toString();
+                String weaponAvail = editTextWeaponAvail.getText().toString();
+                String weaponDamD = editTextWeaponDamD.getText().toString();
+                String weaponDamNum = editTextWeaponDamNum.getText().toString();
+                String weaponShots = editTextWeaponShots.getText().toString();
+                String weaponRof = editTextWeaponRof.getText().toString();
+                String weaponRel = editTextWeaponRel.getText().toString();
+
                 Date createdAt = Calendar.getInstance().getTime();
+
+                Weapon weapon = new Weapon(weaponName, weaponType, weaponWa, weaponConc,
+                        weaponAvail, weaponDamD, weaponDamNum, weaponShots, weaponRof, weaponRel);
                 //Update note
                 mNotesListViewModel.deleteById((long)note.getId());
                 mNotesListViewModel.addNote(new Note(Name, Handle, Role, Age, ChPoints,
@@ -496,6 +738,8 @@ public class MainActivity extends AppCompatActivity
                         StatsAttr, StatsLuck, StatsMa, StatsBody, StatsEmp,
                         StatsRun, StatsLeap, StatsLift, StatsBtm, StatsSave,
                         armorHead, armorTorso, armorRArm, armorLArm, armorRLeg, armorLLeg,
+                        weapon,
+                        note.getAvatarPath(),
                         createdAt));
 
                 fab.show();
@@ -504,6 +748,36 @@ public class MainActivity extends AppCompatActivity
         });
         dialog.show();
 
+    }
+
+    public void checkSurvivalRate(int[] armorArray, TextView textViewSurvivalRate) {
+
+        int test_1 = checkHP(armorArray, 4);
+        int test_2 = checkHP(armorArray, 6);
+        int test_3 = checkHP(armorArray, 8);
+        int sum = test_1 + test_2 + test_3;
+
+        Log.d("SURVIVAL", "test_1 = " + test_1);
+        Log.d("SURVIVAL", "test_2 = " + test_2);
+        Log.d("SURVIVAL", "test_3 = " + test_3);
+        Log.d("SURVIVAL", "Sum = " + sum);
+
+        if (sum < 0) {
+            textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.redSurv));
+        } else if (sum < 200) {
+            textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.yellowSurv));
+        } else {
+            textViewSurvivalRate.setBackgroundColor(getResources().getColor(R.color.greenSurv));
+        }
+
+    }
+
+    public int checkHP (int[] armorArray, int shot) {
+        int sum = 0;
+        for (int value : armorArray) {
+            sum += (value - shot);
+        }
+        return sum;
     }
 
     @Override

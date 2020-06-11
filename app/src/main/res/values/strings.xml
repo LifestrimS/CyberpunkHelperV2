@@ -53,5 +53,19 @@
     <string name="armorRLeg">R.Leg</string>
     <string name="armor">ARMOR</string>
     <string name="generate">Generate</string>
+    <string name="weapon">WEAPON</string>
+    <string name="type">Type</string>
+    <string name="wa">WA</string>
+    <string name="conc">Conc</string>
+    <string name="avail">Avail</string>
+    <string name="dam">Dam</string>
+    <string name="shots">Shots</string>
+    <string name="rof">ROF</string>
+    <string name="rel">Rel</string>
+    <string name="d">D</string>
+    <string name="number">number</string>
+    <string name="num">Num</string>
+    <string name="survival_rate">Survival rate</string>
+    <string name="attack">Attack</string>
 
 </resources>

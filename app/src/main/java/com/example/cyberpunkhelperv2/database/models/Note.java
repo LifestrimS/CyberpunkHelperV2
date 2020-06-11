@@ -1,5 +1,6 @@
 package com.example.cyberpunkhelperv2.database.models;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -52,6 +53,27 @@ public class Note {
     private String armorRLeg;
     private String armorLLeg;
 
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    private String avatarPath;
+
+    @Embedded
+    public Weapon weapon;
+
     //type converter for date
     @TypeConverters(DateConverter.class)
     private Date createdAt;
@@ -62,6 +84,8 @@ public class Note {
                 String statEmp, String statRun, String statLeap, String statLift,
                 String statBtm, String statSave,
                 String armorHead, String armorTorso, String armorRArm, String armorLArm, String armorRLeg, String armorLLeg,
+                Weapon weapon,
+                String avatarPath,
                 Date createdAt) {
 
         this.name = name;
@@ -96,6 +120,10 @@ public class Note {
         this.armorLArm = armorLArm;
         this.armorRLeg = armorRLeg;
         this.armorLLeg = armorLLeg;
+
+        this.weapon = weapon;
+
+        this.avatarPath = avatarPath;
     }
 
     public int getId() {
